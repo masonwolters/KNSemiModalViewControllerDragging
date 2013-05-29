@@ -1,27 +1,4 @@
 //
-//  NSObject+YMOptionsAndDefaults
-//  Created by YangMeyer on 08.10.12.
-//  Copyright (c) 2012 Yang Meyer. All rights reserved.
-//
-@interface NSObject (YMOptionsAndDefaults)
-- (void)ym_registerOptions:(NSDictionary *)options
-				  defaults:(NSDictionary *)defaults;
-- (id)ym_optionOrDefaultForKey:(NSString*)optionKey;
-@end
-//==================================================================================================
-
-
-//
-// Convenient category method to find actual ViewController that contains a view
-//
-@interface UIView (FindUIViewController)
-- (UIViewController *) containingViewController;
-- (id) traverseResponderChainForUIViewController;
-@end
-//==================================================================================================
-
-
-//
 //  KNSemiModalViewController.h
 //  KNSemiModalViewController
 //
@@ -54,6 +31,7 @@ typedef void (^KNTransitionCompletionBlock)(void);
 
 @interface UIViewController (KNSemiModal)
 
+
 /**
  Displays a view controller over the receiver, which is "dimmed".
  @param vc           The view controller to display semi-modally; its view's frame height is used.
@@ -70,15 +48,36 @@ typedef void (^KNTransitionCompletionBlock)(void);
 		   withOptions:(NSDictionary*)options
 			completion:(KNTransitionCompletionBlock)completion;
 
+-(void)moveSemiViewWithPercentToFinish:(float)percent;
+-(void)beginMoveSemiViewController:(UIViewController*)vc withPredefinedSnapshotView:(UIView*)snap;
+-(void)beginMoveSemiViewController:(UIViewController*)vc;
+-(void)finishMovingSemiViewControllerUpWithPercent:(float)percent;
+-(void)finishMovingSemiViewControllerDownWithPercent:(float)percent;
+-(void)dismissSemiModalViewByPanningWithPercent:(float)percent;
+
 // Convenient overloading methods
 -(void)presentSemiViewController:(UIViewController*)vc;
 -(void)presentSemiViewController:(UIViewController*)vc withOptions:(NSDictionary*)options;
+-(void)presentSemiViewController:(UIViewController*)vc withPredefinedSnapshotView:(UIView*)snap;
+-(void)presentSemiViewController:(UIViewController*)vc withPredefinedImage:(UIImage*)image;
 -(void)presentSemiView:(UIView*)vc;
 -(void)presentSemiView:(UIView*)view withOptions:(NSDictionary*)options;
+-(void)presentSemiViewController:(UIViewController*)vc
+          withPreDefinedSnapshot:(UIView*)snap
+					 withOptions:(NSDictionary*)options
+					  completion:(KNTransitionCompletionBlock)completion
+					dismissBlock:(KNTransitionCompletionBlock)dismissBlock;
 
 // Dismiss & resize
 -(void)resizeSemiView:(CGSize)newSize;
 -(void)dismissSemiModalView;
 -(void)dismissSemiModalViewWithCompletion:(KNTransitionCompletionBlock)completion;
 
+@end
+
+// Convenient category method to find actual ViewController that contains a view
+
+@interface UIView (FindUIViewController)
+- (UIViewController *) containingViewController;
+- (id) traverseResponderChainForUIViewController;
 @end
