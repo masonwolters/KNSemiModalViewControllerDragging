@@ -150,6 +150,7 @@ const struct KNSemiModalOptionKeys KNSemiModalOptionKeys = {
 }
 
 - (void)dismissSemiModalViewByPanningWithPercent:(float)percent {
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kSemiModalDidStartDismissing object:nil]];
     NSLog(@"move with percent to finish: %f", percent);
     UIView * target = [self parentTarget];
     UIImageView * ss = (UIImageView*)objc_getAssociatedObject(self, @"ss");
@@ -948,6 +949,7 @@ const struct KNSemiModalOptionKeys KNSemiModalOptionKeys = {
 }
 
 -(void)dismissSemiModalViewWithCompletion:(void (^)(void))completion {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSemiModalWillDismissNotification object:nil];
     UIView * target = [self parentTarget];
     UIView * modal = [target.subviews objectAtIndex:target.subviews.count-1];
     UIView * overlay = [target.subviews objectAtIndex:target.subviews.count-2];
