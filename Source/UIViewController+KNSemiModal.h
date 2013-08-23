@@ -12,6 +12,7 @@
 #define kSemiModalWillDismissNotification @"kSemiModalDidDismissNotification"
 #define kSemiModalDidStartDismissing @"kn_semiModalDidStartDismissing"
 
+
 extern const struct KNSemiModalOptionKeys {
 	__unsafe_unretained NSString *traverseParentHierarchy; // boxed BOOL. default is YES.
 	__unsafe_unretained NSString *pushParentBack;		   // boxed BOOL. default is YES.
